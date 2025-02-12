@@ -3,13 +3,19 @@ const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const authRoutes = require('./routes/auth');
 
 const app = express();
 
 // Подключение к MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connected to MongoDB Atlas'))
-  .catch(err => console.error('MongoDB connection error:', err));
+  .then(() => console.log('✅ Подключено к MongoDB Atlas'))
+  .catch(err => console.error('❌ Ошибка подключения к MongoDB:', err));
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static('public'));
+app.set('view engine', 'ejs');
 
 // Настройка сессий
 app.use(session({
@@ -20,13 +26,14 @@ app.use(session({
   cookie: { maxAge: 1000 * 60 * 60 } // 1 час
 }));
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(express.static('public'));
-app.set('view engine', 'ejs');
+// Передача данных пользователя в шаблоны
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null;
+  next();
+});
 
 // Подключение маршрутов
-const authRoutes = require('./routes/auth');
 app.use('/', authRoutes);
 
-app.listen(3000, () => console.log('Server is running on port 3000'));
+// Запуск сервера
+app.listen(3000, () => console.log('🚀 Сервер запущен на http://localhost:3000'));
