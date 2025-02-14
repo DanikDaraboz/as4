@@ -1,9 +1,13 @@
 require('dotenv').config();
 const express = require('express');
+const path = require('path');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const authRoutes = require('./routes/auth');
+const productRoutes = require('./routes/products');
+
+
 
 const app = express();
 
@@ -11,10 +15,10 @@ const app = express();
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('✅ Подключено к MongoDB Atlas'))
   .catch(err => console.error('❌ Ошибка подключения к MongoDB:', err));
-
+app.use('/products', productRoutes);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static('public'));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 
 // Настройка сессий
@@ -34,6 +38,6 @@ app.use((req, res, next) => {
 
 // Подключение маршрутов
 app.use('/', authRoutes);
-
+app.use('/', productRoutes);
 // Запуск сервера
 app.listen(3000, () => console.log('🚀 Сервер запущен на http://localhost:3000'));

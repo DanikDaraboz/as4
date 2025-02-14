@@ -7,10 +7,11 @@ const UserSchema = new mongoose.Schema({
   failedLoginAttempts: { type: Number, default: 0 },
   isLocked: { type: Boolean, default: false },
   resetCode: { type: String },
-  resetCodeExpires: { type: Date }
+  resetCodeExpires: { type: Date },
+  twoFASecret: { type: String }, // 2FA секретный ключ
+  is2FAEnabled: { type: Boolean, default: false } // Включена ли 2FA
 });
 
-// Хеширование пароля перед сохранением в базу
 UserSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
   this.password = await bcrypt.hash(this.password, 10);

@@ -1,0 +1,746 @@
+
+:root {
+    --background-color: white;
+    --text-color: #333;
+    --header-background: #fff; /* Белый цвет для хедера */
+    --footer-background: black;
+    --button-background: black;
+    --button-hover-background: #007B8C;
+    --link-color: #008CBA;
+    --product-card-background: white;
+    --product-card-shadow: rgba(0, 0, 0, 0.1);
+    --transition-duration: 0.3s; /* Duration of the transition */
+}
+
+/* Dark Theme Styles */
+body.dark-theme {
+    --background-color: #333;
+    --text-color: white;
+    --header-background: #1a1a1a;
+    --footer-background: black;
+    --button-background: #4CAF50;
+    --button-hover-background: #45a049;
+    --link-color: #4CAF50;
+    --product-card-background: #353535;
+    --product-card-shadow: rgba(0, 0, 0, 0.3);
+}
+
+
+/* General body styles */
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: background-color var(--transition-duration), color var(--transition-duration);
+}
+
+/* Header styling */
+header {
+    background-color: var(--header-background);
+    color: white;
+    text-align: center;
+    transition: background-color var(--transition-duration);
+}
+
+/* Footer styling */
+footer {
+    background-color: var(--footer-background);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    bottom: 0;
+    transition: background-color var(--transition-duration);
+}
+
+/* Main content area */
+main {
+    padding: 20px;
+}
+
+/* Product list grid layout */
+.product-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.product-card2 {
+    background-color: var(--product-card-background);
+    width: 300px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px var(--product-card-shadow);
+    text-align: center;
+    transition: background-color var(--transition-duration), box-shadow var(--transition-duration);
+}
+/* Styling for each product card */
+.product-card {
+    background-color: var(--product-card-background);
+    width: 500px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px var(--product-card-shadow);
+    text-align: center;
+    transition: background-color var(--transition-duration), box-shadow var(--transition-duration);
+}
+.product-card2 h2 {
+    font-size: 23px;
+    color: var(--text-color);
+    margin-top: 10px;
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.product-card h2 {
+    font-size: 23px;
+    color: var(--text-color);
+    margin-top: 10px;
+}
+
+.product-price {
+    font-size: 16px;
+    color: #888;
+    margin: 10px 0;
+}
+
+.view-details {
+    background-color: var(--button-background);
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color var(--transition-duration);
+}
+
+.view-details:hover {
+    background-color: var(--button-hover-background);
+}
+
+/* Product detail page */
+.product-detail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.product-detail-image {
+    width: 650px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.product-info {
+    max-width: 400px;
+}
+
+.product-info h2 {
+    font-size: 24px;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: var(--button-background);
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color var(--transition-duration);
+}
+
+button:hover {
+    background-color: var(--button-hover-background);
+}
+
+/* Theme toggle button */
+.theme-toggle {
+    width: 45px;
+    height: 45px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color var(--transition-duration), color var(--transition-duration);
+}
+
+.theme-toggle:hover {
+    background-color: white;
+}
+button, .go-back-button {
+    background-color: var(--button-background);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    text-decoration: none; /* For the <a> link */
+    transition: background-color var(--transition-duration);
+}
+
+button:hover, .go-back-button:hover {
+    background-color: var(--button-hover-background);
+}
+
+
+.navbar {
+    height: 65px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.navbar2 {
+    height: 65px;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav-item {
+    position: relative;
+    margin:10px 20px;
+}
+
+
+.nav-item a, .nav-item #catalog-text {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    cursor: pointer;
+}
+.nav-item a.active{
+    color: #000; /* Черный цвет текста */
+    font-weight: bold; /* Жирное начертание для выделенной вкладки */
+}
+.nav-item a.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    height: 3px; /* Высота полоски */
+    background-color: black;
+}
+.dark-theme .nav-item a.active::after{
+    background-color: white;
+}
+.dark-theme .nav-item.active::after{
+    background-color: white;
+}
+
+
+
+.nav-item.active a {
+    font-weight: bold;
+    color: black;
+}
+
+
+#catalog-text.active {
+    color: #000; /* Черный цвет текста */
+    font-weight: bold; /* Жирное начертание для выделенной вкладки */
+}
+#catalog-text.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px; /* Высота полоски */
+    background-color: black;
+}
+.dark-theme #catalog-text.active::after{
+    background-color: white;
+}
+/* Основной контейнер для каталога */
+.catalog {
+    position:relative;
+}
+
+.catalog-toggle {
+    display: none;
+}
+
+/* Текст каталога с курсором в виде указателя */
+#catalog-text {
+    cursor: pointer;
+    transition: color 0.3s ease; /* Плавный переход для цвета текста */
+}
+
+/* Стили для выпадающего меню */
+.category-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    z-index: 10;
+    border-radius: 10%;
+}
+
+.category-menu.show {
+    display: block;
+    opacity: 1;
+}
+/* Стили для списка категорий */
+.category-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Стили для пунктов меню категорий */
+.category-menu li {
+    padding: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease; /* Плавный переход для цвета текста */
+}
+
+/* Изменение фона при наведении на элемент меню */
+.category-menu li:hover {
+    background-color: #f1f1f1;
+}
+/* При наведении на каталог показывается меню */
+
+/* Меняем цвет текста на черный при наведении */
+.catalog:hover #catalog-text {
+    color: black; /* Черный цвет текста */
+}
+
+/* Меняем цвет текста на черный для пунктов меню при наведении */
+.catalog:hover .category-menu li {
+    color: black; /* Черный цвет текста для пунктов */
+}
+
+
+.catalog-toggle:checked + .category-menu {
+    display: block;
+}
+
+/* Меняем цвет текста на черный при активном состоянии */
+.catalog-toggle:checked ~ #catalog-text {
+    color: black;
+}
+
+
+.category-menu li a.active {
+    font-weight: bold;
+    color: black;
+    position: relative;
+}
+
+/* Полоса под активной категорией */
+.category-menu li a.active::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: black;
+    bottom: 0;
+    left: 0;
+}
+/* Если выбрана категория, делаем "Catalog" жирным */
+.category-menu li a:focus ~ #catalog-text,
+.category-menu li a:active ~ #catalog-text {
+    font-weight: bold;
+    color: black;
+}
+/* Кнопка для смены темы */
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.sign{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Размер иконок */
+.theme-icon {
+    width: 45px;  /* Размер иконки */
+    height: 45px;
+}
+.theme-icon2 {
+    width: 30px;  /* Размер иконки */
+    height: 30px;
+}
+
+/* Скрыть иконку луны по умолчанию */
+#moon-icon {
+    display: none;
+}
+
+
+/* Стили для темной темы */
+body.dark-theme {
+    background-color: #1a202c;
+    color: #fff;
+}
+
+body.dark-theme .navbar {
+    background-color: #1a202c;
+}
+
+body.dark-theme .navbar2 {
+    background-color: #1a202c;
+}
+body.dark-theme .theme-toggle:hover {
+    background-color: #1a202c;
+}
+
+
+body.dark-theme .nav-item a, body.dark-theme .nav-item #catalog-text {
+    color: #ccc;
+}
+
+body.dark-theme .nav-item.active a {
+    color: white;
+}
+
+body.dark-theme .category-menu {
+    background-color: white;
+}
+
+body.dark-theme .category-menu li {
+    color: #ccc;
+}
+
+body.dark-theme .category-menu li:hover {
+    background-color: #444;
+}
+
+
+
+.img1{
+    width: 100%;
+}
+.logo-link{
+    display: flex;
+    justify-content: left;
+}
+.logo{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.logo2{
+    position: absolute;
+    left: 20px;
+    top:10px;
+}
+
+.sign-in-btn {
+    background-color: green;
+    color: white;
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+
+
+
+.auth-container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+
+.auth-container h2 {
+    margin-bottom: 20px;
+}
+.dark-theme .auth-container h2 {
+    color: black;
+}
+.dark-theme .auth-container label {
+    color: black;
+}
+.auth-container input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.auth-container button {
+    width: 100%;
+    padding: 10px;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.auth-container button:hover {
+    background: #0056b3;
+}
+
+.auth-container p {
+    margin-top: 15px;
+}
+.dark-theme .auth-container p {
+    color: black;
+}
+.auth2{
+    display: flex;
+    justify-content: center;
+}
+.car{
+    width:90%;
+}
+#car{
+    height:40%;
+}
+.par{
+    display: flex;
+    justify-content: center;
+}
+#car2{
+    height:100%;
+    width: 100%;
+    transition: transform 0.3s ease-in-out;
+}
+#car2:hover {
+    transform: scale(1.1);
+}
+.imgcont{
+    position: relative;
+    width: 100%; /* Ширина контейнера */
+    overflow: hidden; /* Обрезаем выходящие части */
+    display: flex; /* Чтобы изображение центрировалось */
+    justify-content: center;
+}
+.imgtext {
+    position: absolute;
+    top: 70%;
+    left: 9%;
+    transform: translate(-50%, -50%);
+    font-size: 45px;
+    font-weight: bold;
+    color: rgb(38, 95, 95);
+}
+.htext{
+    color: whitesmoke;
+    font-size: 45px;
+    font-weight: bold;
+}
+
+.carousel-item {
+    transition: opacity 2s ease-in-out !important;
+}
+
+.carousel-item.active {
+    opacity: 1 !important;
+}
+.htext2{
+    color: black;
+    font-size: 45px;
+    font-weight: bold;
+    margin-left: 60px;
+    margin-top: 30px;
+}
+
+.dark-theme .htext2{
+    color: white;
+}
+
+
+
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.footer-section {
+    flex: 1 1 200px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.footer-section h5 {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.footer-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: white
+}
+
+.footer-section ul li a:hover {
+    text-decoration: underline;
+}
+
+
+.user-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    font-weight: bold;
+    font-size: 18px;
+    text-decoration: none;
+    display: none;
+    
+}
+
+.favorites-icon{
+    width: 25px;
+    height: auto;
+    position: absolute;
+    margin-left: 15px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.favorites-icon.favorited {
+    filter: brightness(0.6) sepia(1) hue-rotate(330deg) saturate(5); /* Красный оттенок */
+    transform: scale(1.2);
+}
+.dark-theme .favorites-icon.favorited {
+    filter: brightness(0.6) sepia(1) hue-rotate(330deg) saturate(5); /* Красный оттенок */
+    transform: scale(1.2);
+}
+.dark-theme .favorites-icon{
+    filter: invert(1);
+}
+.dark-theme .theme-icon2{
+    filter: invert(1);
+}
+#favorites3{
+    width: 30px;
+    height: auto;
+}
+.dark-theme #favorites3{
+    filter: invert(1);
+}
+.quantity{
+    width: 25px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin: 15px;
+}
+.dark-theme .quantity{
+    filter: invert(1);
+}
+.buy2{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+
+.asd{
+    display: flex;
+    justify-content: center;
+}
+.payment-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+}
+
+.payment-title {
+    margin-bottom: 20px;
+}
+
+.payment-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.card-details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-details .input-group {
+    width: 48%;
+}
+.change-quantity{
+    background-color: white;
+}
+.change-quantity:hover{
+    background-color: white;
+}
+.dark-theme .change-quantity{
+    background-color: #353535;
+}
+.dark-theme .change-quantity:hover{
+    background-color: #353535;
+}
+.dfg{
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+}
+.dark-theme .dfg{
+    color: white;
+}
+.hjk{
+    text-decoration: none;
+}

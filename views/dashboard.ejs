@@ -3,13 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/css/styles.css">
-
+    <link rel="stylesheet" href="/public/css/styles.css">
     <title>Личный кабинет</title>
 </head>
 <body>
-    <h1>Личный кабинет</h1>
-    <p>Добро пожаловать, <%= user.email %>!</p>
-    <a href="/logout">Выйти</a>
+    <div class="container">
+        <h1>Личный кабинет</h1>
+        <p>Добро пожаловать, <%= user.email %>!</p>
+
+        <!-- Отображение статуса 2FA -->
+        <% if (user.is2FAEnabled==true) { %>
+            <p class="status enabled">2FA включена</p>
+            <form action="/disable-2fa" method="POST">
+                <button type="submit">Отключить 2FA</button>
+            </form>
+        <% } else { %>
+            <p class="status disabled">2FA отключена</p>
+            <a href="/setup-2fa">
+                <button>Настроить 2FA</button>
+            </a>
+        <% } %>
+
+        <a href="/logout">
+            <button class="logout">Выйти</button>
+        </a>
+    </div>
 </body>
 </html>

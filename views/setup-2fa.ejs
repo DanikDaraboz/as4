@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <title>Настройка 2FA</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Настройка двухфакторной аутентификации</h1>
+        <p>Отсканируйте QR-код с помощью Google Authenticator или введите код вручную:</p>
+        <img src="<%= qrCode %>" alt="QR Code"> 
+<p><strong>Секретный код:</strong> <%= secret %></p>
+        
+<form action="/verify-setup-2fa" method="POST">
+    <label for="otp">Введите код из приложения:</label>
+    <input type="text" name="otp" required>
+    <button type="submit">Подтвердить</button>
+</form>
+
+    </div>
+</body>
+</html>

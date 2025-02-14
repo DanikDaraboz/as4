@@ -1,21 +1,157 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/css/styles.css">
-
-    <title>Главная</title>
+    <title>{{.Title}}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/public/css/styles2.css">
+    <link rel="stylesheet" href="/static/styles2.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Добро пожаловать!</h1>
-    <% if (user) { %>
-        <p>Вы вошли как <%= user.email %></p>
-        <a href="/dashboard">Перейти в личный кабинет</a>
-        <a href="/logout">Выйти</a>
-    <% } else { %>
-        <a href="/login">Войти</a>
-        <a href="/register">Регистрация</a>
-    <% } %>
+    <header>
+        <nav class="navbar2">
+            <div class="sign">
+                    <a href="/account" id="user-icon" class="user-icon"></a>
+                    <a href="/auth" class="sign-in-btn" id="sign-in-btn">Sign In</a>
+                        <button class="theme-toggle" onclick="toggleTheme()">
+                            <img id="sun-icon" src="/public/images/sun.png" alt="Sun Icon" class="theme-icon">
+                            <img id="moon-icon" src="/public/images/moon.png" alt="Moon Icon" class="theme-icon2">
+                        </button>
+            </div>
+        </nav>
+
+
+        <nav class="navbar">
+            <div class="logo2">
+                <a href="index.html" class="logo-link">
+                    <img src="/public/images/logo.png" alt="Logo" class="logo">
+                </a>
+            </div>
+            <ul class="nav-list">
+                <li class="nav-item active"><a href="/h" class="fix">Home</a></li>
+                <li class="nav-item"> <div class="catalog">
+                    <label for="catalog-toggle" id="catalog-text">Catalog</label>
+                    <input type="checkbox" id="catalog-toggle" class="catalog-toggle">
+                    <div class="category-menu">
+                        <ul>
+                            <li data-category="all"><a href="/all">All products</a></li>
+                            {{range .Categories}}
+                                <li><a href="/category/{{.}}">{{.}}</a></li>
+                            {{end}}
+                        </ul>
+                    </div>
+                </div></li>
+                <li class="nav-item"><a href="/men"class="fix">Men</a></li>
+                <li class="nav-item"><a href="/women"class="fix">Women</a></li>
+                <a href="/favorites"class="fix"><img src="/public/images/favorites2.png" alt="" id="favorites3"></a>
+                <a href="/cart"class="fix" style="position: absolute; margin-left: 55%;"><img src="/static/images/cart.png" alt="" id="favorites3"></a>
+                <!-- Перемещаем кнопку смены темы сюда -->
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="par">
+        <div class="car">
+            <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade"  data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="/public/images/3.png" class="d-block w-100" alt="..." id="car">
+                        <div class="carousel-caption d-none d-md-block">
+                        <h5 class="htext">Be strong, be the best</h5>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/public/images/4.png" class="d-block w-100" alt="..." id="car">
+                        <div class="carousel-caption d-none d-md-block">
+                        <h5 class="htext">Lightness and speed in every step</h5>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/public/images/5.png" class="d-block w-100" alt="..." id="car">
+                        <div class="carousel-caption d-none d-md-block">
+                        <h5 class="htext">Gear up like a champion</h5>
+                        </div>
+                    </div>
+                </div>
+              </div>
+        </div>
+    </div>
+        <h1 class="htext2">TOP PICS FOR YOU</h1>
+        <div class="product-list">
+            <% products.forEach(product => { %>
+                <div class="product-card2">
+                    <img src="<%= product.image %>" alt="<%= product.name %>" class="product-image">
+                    <h2><%= product.Name %></h2>
+                    <p class="product-price">$<%= product.Price %></p>
+                    <a href="/product?id={{.ID}}" class="view-details">View Details</a>
+                    <img src="/public/images/favorites2.png" alt="Add to Favorites" class="favorites-icon" data-id="{{.ID}}">
+
+                </div>
+            <% }); %>
+        </div>
+        <h1 class="htext2">WHO ARE YOU SHOPPING FOR?</h1>
+        <div class="imgcont">
+            <img src="/public/images/men.png" class="d-block w-100" alt="..." id="car2">
+            <div class="imgtext"><a href="/men" class="hjk">MEN</a></div>
+        </div>
+        <div class="imgcont">
+            <img src="/public/images/women.png" class="d-block w-100" alt="..." id="car2">
+            <div class="imgtext"><a href="/women" class="hjk">WOMEN</a></div>
+        </div>
+        <div class="imgcont">
+            <img src="/public/images/shoes.png" class="d-block w-100" alt="..." id="car2">
+            <div class="imgtext"><a href="/category/shoes" class="hjk">SHOES</a></div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h1>Product</h1>
+                <ul>
+                    <li><a href="/category/football">Football</a></li>
+                    <li><a href="/category/tennis">Tennis</a></li>
+                    <li><a href="/category/basketball">Basketball</a></li>
+                    <li><a href="/category/baseball">Baseball</a></li>
+                </ul>
+            </div>
+            
+        
+    
+            <div class="footer-section">
+                <h1>Support</h1>
+                <ul>
+                    <li><a href="/help">Help</a></li>
+                    <li><a href="/customer-service">Customer Service</a></li>
+                    <li><a href="/shipping">Shipping</a></li>
+                    <li><a href="/order-tracker">Order Tracker</a></li>
+                    <li><a href="/returns">Returns & Exchanges</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer-section">
+                <h1>Company Info</h1>
+                <ul>
+                    <li><a href="/about-us">About Us</a></li>
+                    <li><a href="/entity-details">Entity Details</a></li>
+                    <li><a href="/careers">Careers</a></li>
+                    <li><a href="/apps">Company Apps</a></li>
+                </ul>
+            </div>
+        </div>
+        <p>&copy; 2025 Sports Goods Store</p>
+    </footer>
+
+    <!-- Link to the external JS file -->
+
+    <script src="/static/theme-toggle.js"></script>
+    <script src="/static/active.js"></script>
+    <script src="/static/catalog.js"></script>
+    <script src="/static/account.js"></script>
+    <script src="/static/favorites.js"></script>
+    <script src="/static/cart.js"></script>
 </body>
 </html>
