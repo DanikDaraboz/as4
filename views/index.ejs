@@ -6,15 +6,13 @@
     <title>{{.Title}}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="/public/css/styles2.css">
-    <link rel="stylesheet" href="/static/styles2.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
         <nav class="navbar2">
             <div class="sign">
-                    <a href="/account" id="user-icon" class="user-icon"></a>
-                    <a href="/auth" class="sign-in-btn" id="sign-in-btn">Sign In</a>
+                    <a href="/dashboard" id="user-icon" class="user-icon"></a>
                         <button class="theme-toggle" onclick="toggleTheme()">
                             <img id="sun-icon" src="/public/images/sun.png" alt="Sun Icon" class="theme-icon">
                             <img id="moon-icon" src="/public/images/moon.png" alt="Moon Icon" class="theme-icon2">
@@ -25,28 +23,29 @@
 
         <nav class="navbar">
             <div class="logo2">
-                <a href="index.html" class="logo-link">
+                <a href="/" class="logo-link">
                     <img src="/public/images/logo.png" alt="Logo" class="logo">
                 </a>
             </div>
             <ul class="nav-list">
-                <li class="nav-item active"><a href="/h" class="fix">Home</a></li>
+                <li class="nav-item active"><a href="/" class="fix">Home</a></li>
                 <li class="nav-item"> <div class="catalog">
                     <label for="catalog-toggle" id="catalog-text">Catalog</label>
                     <input type="checkbox" id="catalog-toggle" class="catalog-toggle">
                     <div class="category-menu">
                         <ul>
                             <li data-category="all"><a href="/all">All products</a></li>
-                            {{range .Categories}}
-                                <li><a href="/category/{{.}}">{{.}}</a></li>
-                            {{end}}
+                            <% Categories.forEach(category => { %>
+                                <li><a href="/category/<%= category %>"><%= category %></a></li>
+                            <% }); %>
+                            
                         </ul>
                     </div>
                 </div></li>
                 <li class="nav-item"><a href="/men"class="fix">Men</a></li>
                 <li class="nav-item"><a href="/women"class="fix">Women</a></li>
-                <a href="/favorites"class="fix"><img src="/public/images/favorites2.png" alt="" id="favorites3"></a>
-                <a href="/cart"class="fix" style="position: absolute; margin-left: 55%;"><img src="/static/images/cart.png" alt="" id="favorites3"></a>
+                <a href="/wishlist"class="fix"><img src="/public/images/favorites2.png" alt="" id="favorites3"></a>
+                <a href="/cart"class="fix" style="position: absolute; margin-left: 55%;"><img src="/public/images/cart.png" alt="" id="favorites3"></a>
                 <!-- Перемещаем кнопку смены темы сюда -->
             </ul>
         </nav>
@@ -81,17 +80,25 @@
     </div>
         <h1 class="htext2">TOP PICS FOR YOU</h1>
         <div class="product-list">
-            <% products.forEach(product => { %>
+            <% products.slice(0, 4).forEach(product => { %>
                 <div class="product-card2">
-                    <img src="<%= product.image %>" alt="<%= product.name %>" class="product-image">
+                    <img src="<%= product.Image %>" alt="<%= product.Name %>" class="product-image">
                     <h2><%= product.Name %></h2>
                     <p class="product-price">$<%= product.Price %></p>
-                    <a href="/product?id={{.ID}}" class="view-details">View Details</a>
-                    <img src="/public/images/favorites2.png" alt="Add to Favorites" class="favorites-icon" data-id="{{.ID}}">
-
+                    <a href="/product/<%= product.ID %>" class="view-details">View Details</a>
+        
+                    <!-- Проверяем, есть ли товар в избранных, предотвращаем ошибку -->
+                    <% let isFavorited = user && user.favorites ? user.favorites.map(fav => fav.toString()).includes(product._id.toString()) : false; %>
+                    <img src="/public/images/favorites2.png" 
+                         alt="Add to Favorites" 
+                         class="favorites-icon <%= isFavorited ? 'favorited' : '' %>"
+                         data-id="<%= product._id %>"
+                         data-userid="<%= user ? user._id : '' %>">
                 </div>
             <% }); %>
         </div>
+        
+        
         <h1 class="htext2">WHO ARE YOU SHOPPING FOR?</h1>
         <div class="imgcont">
             <img src="/public/images/men.png" class="d-block w-100" alt="..." id="car2">
@@ -106,7 +113,7 @@
             <div class="imgtext"><a href="/category/shoes" class="hjk">SHOES</a></div>
         </div>
     </main>
-
+ 
     <footer>
         <div class="footer-container">
             <div class="footer-section">
@@ -147,11 +154,11 @@
 
     <!-- Link to the external JS file -->
 
-    <script src="/static/theme-toggle.js"></script>
+    <script src="/public/js/theme-toggle.js"></script>
     <script src="/static/active.js"></script>
     <script src="/static/catalog.js"></script>
     <script src="/static/account.js"></script>
-    <script src="/static/favorites.js"></script>
+    <script src="/public/js/favorites.js"></script>
     <script src="/static/cart.js"></script>
 </body>
 </html>

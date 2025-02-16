@@ -6,9 +6,10 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const authRoutes = require('./routes/auth');
 const productRoutes = require('./routes/products');
-
-
-
+const categoryRoutes = require('./routes/category');
+const favoritesRoutes = require("./routes/favorites");
+const wishlistRoutes = require("./routes/wishlist");
+const productPageRoutes = require("./routes/product");
 const app = express();
 
 // Подключение к MongoDB Atlas
@@ -39,5 +40,10 @@ app.use((req, res, next) => {
 // Подключение маршрутов
 app.use('/', authRoutes);
 app.use('/', productRoutes);
+app.use('/', categoryRoutes);
+app.use("/api/favorites", favoritesRoutes);
+app.use("/", wishlistRoutes);
+app.use("/", productPageRoutes);
+
 // Запуск сервера
 app.listen(3000, () => console.log('🚀 Сервер запущен на http://localhost:3000'));

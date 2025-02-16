@@ -1,52 +1,242 @@
 [
-    {
-      "ID": 1,
-      "Name": "Superstar 2 Shoes",
-      "Category": "Shoes",
-      "Price": 99.99,
-      "Image": "/public/images/shoe1.png"
-    },
-    {
-      "ID": 2,
-      "Name": "Superstar 2 Shoes",
-      "Category": "Shoes",
-      "Price": 99.99,
-      "Image": "/public/images/shoe2.png"
-    },
-    {
-      "ID": 3,
-      "Name": "Country Japan Shoes",
-      "Category": "Shoes",
-      "Price": 85.99,
-      "Image": "/public/images/shoe3.png"
-    },
-    {
-      "ID": 4,
-      "Name": "Samba OG Shoes",
-      "Category": "Shoes",
-      "Price": 119.99,
-      "Image": "/public/images/shoe4.png"
-    },
-    {
-      "ID": 5,
-      "Name": "Superstar 2 shoes",
-      "Category": "Shoes",
-      "Price": 140.99,
-      "Image": "/public/images/shoe5.png"
-    },
-    {
-      "ID": 6,
-      "Name": "SL 72 OG Shoes",
-      "Category": "Shoes",
-      "Price": 75.99,
-      "Image": "/public/images/shoe6.png"
-    },
-    {
-      "ID": 7,
-      "Name": "Samba Messi",
-      "Category": "Shoes",
-      "Price": 109.99,
-      "Image": "/public/images/shoe7.png"
-    }
-  ]
-  
+  {
+    "ID": 1,
+    "Name": "Superstar 2 Shoes",
+    "Category": "Casual",
+    "Gender": "Men",
+    "Price": 99.99,
+    "Image": "/public/images/shoe1.png",
+    "Cart": false,
+    "sizes": [
+      { "size": "M5.5", "quantity": 10 },
+      { "size": "M6", "quantity": 12 },
+      { "size": "M6.5", "quantity": 9 },
+      { "size": "M7", "quantity": 14 }
+    ]
+  },
+  {
+    "ID": 2,
+    "Name": "Superstar 2 Shoes",
+    "Category": "Casual",
+    "Gender": "Men",
+    "Price": 99.99,
+    "Image": "/public/images/shoe2.png",
+    "Cart": false,
+    "sizes": [
+      { "size": "M5.5", "quantity": 8 },
+      { "size": "M6", "quantity": 10 },
+      { "size": "M6.5", "quantity": 11 },
+      { "size": "M7", "quantity": 9 }
+    ]
+  },
+  {
+    "ID": 3,
+    "Name": "Country Japan Shoes",
+    "Category": "Casual",
+    "Gender": "Men",
+    "Price": 85.99,
+    "Image": "/public/images/shoe3.png",
+    "Cart": false,
+    "sizes": [
+      { "size": "M5.5", "quantity": 6 },
+      { "size": "M6", "quantity": 7 },
+      { "size": "M6.5", "quantity": 10 },
+      { "size": "M7", "quantity": 8 }
+    ]
+  },
+  {
+    "ID": 4,
+    "Name": "Samba OG Shoes",
+    "Category": "Casual",
+    "Gender": "Men",
+    "Price": 119.99,
+    "Image": "/public/images/shoe4.png",
+    "Cart": false,
+    "sizes": [
+      { "size": "M5.5", "quantity": 5 },
+      { "size": "M6", "quantity": 8 },
+      { "size": "M6.5", "quantity": 9 },
+      { "size": "M7", "quantity": 7 }
+    ]
+  },
+  {
+    "ID": 5,
+    "Name": "Superstar 2 Shoes",
+    "Category": "Casual",
+    "Gender": "Men",
+    "Price": 140.99,
+    "Image": "/public/images/shoe5.png",
+    "Cart": false,
+    "sizes": [
+      { "size": "M5.5", "quantity": 9 },
+      { "size": "M6", "quantity": 10 },
+      { "size": "M6.5", "quantity": 7 },
+      { "size": "M7", "quantity": 8 }
+    ]
+  },
+  {
+    "ID": 6,
+    "Name": "SL 72 OG Shoes",
+    "Category": "Casual",
+    "Gender": "Men",
+    "Price": 75.99,
+    "Image": "/public/images/shoe6.png",
+    "Cart": false,
+    "sizes": [
+      { "size": "M5.5", "quantity": 6 },
+      { "size": "M6", "quantity": 12 },
+      { "size": "M6.5", "quantity": 9 },
+      { "size": "M7", "quantity": 11 }
+    ]
+  },
+  {
+    "ID": 7,
+    "Name": "Samba Messi",
+    "Category": "Casual",
+    "Gender": "Men",
+    "Price": 109.99,
+    "Image": "/public/images/shoe7.png",
+    "Cart": false,
+    "sizes": [
+      { "size": "M5.5", "quantity": 7 },
+      { "size": "M6", "quantity": 10 },
+      { "size": "M6.5", "quantity": 11 },
+      { "size": "M7", "quantity": 10 }
+    ]
+  },
+  {
+    "ID": 8,
+    "Name": "Ultraboost Light Shoes",
+    "Category": "Casual",
+    "Gender": "Women",
+    "Price": 79.99,
+    "Image": "/public/images/ws1.png",
+    "Cart": false,
+    "sizes": [
+      { "size": "W5", "quantity": 10 },
+      { "size": "W5.5", "quantity": 9 },
+      { "size": "W6", "quantity": 11 },
+      { "size": "W6.5", "quantity": 12 }
+    ]
+  },
+  {
+    "ID": 9,
+    "Name": "Samba OG Shoes",
+    "Category": "Casual",
+    "Gender": "Women",
+    "Price": 89.99,
+    "Image": "/public/images/ws2.png",
+    "Cart": false,
+    "sizes": [
+      { "size": "W5", "quantity": 8 },
+      { "size": "W5.5", "quantity": 7 },
+      { "size": "W6", "quantity": 10 },
+      { "size": "W6.5", "quantity": 9 }
+    ]
+  },
+  {
+    "ID": 10,
+    "Name": "NMD_R1 Shoes",
+    "Category": "Running",
+    "Gender": "Women",
+    "Price": 120.99,
+    "Image": "/public/images/ws3.png",
+    "Cart": false,
+    "sizes": [
+      { "size": "W5", "quantity": 12 },
+      { "size": "W5.5", "quantity": 10 },
+      { "size": "W6", "quantity": 15 },
+      { "size": "W6.5", "quantity": 14 }
+    ]
+  },
+  {
+    "ID": 11,
+    "Name": "Swift Run Shoes",
+    "Category": "Casual",
+    "Gender": "Women",
+    "Price": 89.99,
+    "Image": "/public/images/ws4.png",
+    "Cart": false,
+    "sizes": [
+      { "size": "W5", "quantity": 9 },
+      { "size": "W5.5", "quantity": 8 },
+      { "size": "W6", "quantity": 11 },
+      { "size": "W6.5", "quantity": 10 }
+    ]
+  },
+  {
+    "ID": 12,
+    "Name": "Stan Smith Shoes",
+    "Category": "Casual",
+    "Gender": "Women",
+    "Price": 99.99,
+    "Image": "/public/images/ws5.png",
+    "Cart": false,
+    "sizes": [
+      { "size": "W5", "quantity": 8 },
+      { "size": "W5.5", "quantity": 9 },
+      { "size": "W6", "quantity": 12 },
+      { "size": "W6.5", "quantity": 10 }
+    ]
+  },
+  {
+    "ID": 13,
+    "Name": "Bravada 2.0",
+    "Category": "Casual",
+    "Gender": "Men",
+    "Price": 109.99,
+    "Image": "/public/images/ms1.png",
+    "Cart": false,
+    "sizes": [
+      { "size": "M5.5", "quantity": 10 },
+      { "size": "M6", "quantity": 12 },
+      { "size": "M6.5", "quantity": 9 },
+      { "size": "M7", "quantity": 14 }
+    ]
+  },
+  {
+    "ID": 14,
+    "Name": "Adizero Evo SL",
+    "Category": "Running",
+    "Gender": "Men",
+    "Price": 89.99,
+    "Image": "/public/images/ms2.png",
+    "Cart": false,
+    "sizes": [
+      { "size": "M5.5", "quantity": 10 },
+      { "size": "M6", "quantity": 17 },
+      { "size": "M6.5", "quantity": 9 },
+      { "size": "M7", "quantity": 11 }
+    ]
+  },
+  {
+    "ID": 15,
+    "Name": "Adizero Boston 12",
+    "Category": "Running",
+    "Gender": "Men",
+    "Price": 119.99,
+    "Image": "/public/images/ms3.png",
+    "Cart": false,
+    "sizes": [
+      { "size": "M5.5", "quantity": 10 },
+      { "size": "M6", "quantity": 17 },
+      { "size": "M6.5", "quantity": 9 },
+      { "size": "M7", "quantity": 11 }
+    ]
+  },
+  {
+    "ID": 16,
+    "Name": "Adizero Pro 4",
+    "Category": "Running",
+    "Gender": "Men",
+    "Price": 89.99,
+    "Image": "/public/images/ms4.png",
+    "Cart": false,
+    "sizes": [
+      { "size": "M5.5", "quantity": 12 },
+      { "size": "M6", "quantity": 17 },
+      { "size": "M6.5", "quantity": 9 },
+      { "size": "M7", "quantity": 14 }
+    ]
+  }
+]

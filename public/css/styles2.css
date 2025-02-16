@@ -66,10 +66,11 @@ main {
     justify-content: space-around;
     flex-wrap: wrap;
     gap: 20px;
+    row-gap: 120px !important;
 }
 .product-card2 {
     background-color: var(--product-card-background);
-    width: 300px;
+    width: 500px;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px var(--product-card-shadow);
@@ -517,7 +518,7 @@ body.dark-theme .category-menu li:hover {
     width:90%;
 }
 #car{
-    height:40%;
+    height:500px;
 }
 .par{
     display: flex;
@@ -622,7 +623,6 @@ body.dark-theme .category-menu li:hover {
     font-weight: bold;
     font-size: 18px;
     text-decoration: none;
-    display: none;
     
 }
 
@@ -635,6 +635,14 @@ body.dark-theme .category-menu li:hover {
     transition: transform 0.2s;
 }
 .favorites-icon.favorited {
+    filter: brightness(0.6) sepia(1) hue-rotate(330deg) saturate(5); /* Красный оттенок */
+    transform: scale(1.2);
+}
+.favorited{
+    filter: brightness(0.6) sepia(1) hue-rotate(330deg) saturate(5); /* Красный оттенок */
+    transform: scale(1.2);
+}
+.dark-theme .favorites-icon.favorited {
     filter: brightness(0.6) sepia(1) hue-rotate(330deg) saturate(5); /* Красный оттенок */
     transform: scale(1.2);
 }

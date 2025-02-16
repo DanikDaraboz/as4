@@ -9,7 +9,8 @@ const UserSchema = new mongoose.Schema({
   resetCode: { type: String },
   resetCodeExpires: { type: Date },
   twoFASecret: { type: String }, // 2FA секретный ключ
-  is2FAEnabled: { type: Boolean, default: false } // Включена ли 2FA
+  is2FAEnabled: { type: Boolean, default: false }, // Включена ли 2FA
+  favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }] // Избранные товары
 });
 
 UserSchema.pre('save', async function (next) {

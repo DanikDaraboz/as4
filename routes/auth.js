@@ -12,17 +12,30 @@ const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS }
 });
+async function getCategories() {
+  return await Product.distinct("Category"); // Получает список всех категорий
+}
 
 // 📌 Главная страница
 const Product = require("../model/Product");
+
 router.get("/", async (req, res) => {
   try {
     const products = await Product.find();
-    res.render("index", { products });
+    const categories = await getCategories();
+    
+    let favorites = [];
+    if (req.user) {
+      const user = await User.findById(req.user._id);
+      favorites = user.favorites.map(id => id.toString()); // Преобразуем ObjectId в строку
+    }
+
+    res.render("index", { products, Categories: categories, favorites });
   } catch (error) {
     res.status(500).send("Ошибка загрузки товаров");
   }
 });
+
 router.get('/auth', (req, res) => res.render('auth'));
 router.post('/auth', async (req, res) => {
   res.redirect('/auth');
@@ -207,10 +220,11 @@ router.post('/disable-2fa', async (req, res) => {
 
 // 📌 Личный кабинет
 router.get('/dashboard', async (req, res) => {
+  const categories = await getCategories();
   if (!req.session.user) return res.redirect('/login');
 
   const user = await User.findById(req.session.user.id);
-  res.render('dashboard', { user });
+  res.render('dashboard', { user,Categories:categories });
 });
 
 // 📌 Заблокированный аккаунт
