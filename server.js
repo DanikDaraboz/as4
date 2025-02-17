@@ -44,6 +44,7 @@ app.use('/', categoryRoutes);
 app.use("/api/favorites", favoritesRoutes);
 app.use("/", wishlistRoutes);
 app.use("/", productPageRoutes);
+app.use("/api/cart", require("./routes/cart"));
 
 // Запуск сервера
 app.listen(3000, () => console.log('🚀 Сервер запущен на http://localhost:3000'));

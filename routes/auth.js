@@ -109,6 +109,172 @@ router.post('/reset-password', async (req, res) => {
   res.redirect('/verify-reset-code?email=' + email);
 });
 
+
+
+router.get("/cart", async (req, res) => {
+  try {
+      if (!req.session.user) {
+          return res.redirect("/login");
+      }
+
+      const user = await User.findById(req.session.user.id).populate("Cart.product");
+      console.log(user.Cart);
+
+      if (!user) {
+          return res.status(404).send("❌ Пользователь не найден");
+      }
+
+      const cartItems = user.Cart || []; // Предотвращаем ошибку, если корзина пустая
+      const products = cartItems.map(item => item.product); // Извлекаем товары
+      const categories = await getCategories(); // Загружаем категории
+
+      res.render("cart", { 
+          title: "Your Cart", 
+          cartItems, 
+          products, // 🔹 Передаем products в шаблон
+          Categories: categories,
+          user 
+      });
+  } catch (error) {
+      console.error("Ошибка при загрузке корзины:", error);
+      res.status(500).send("Ошибка сервера");
+  }
+});
+
+
+
+router.post("/buy", async (req, res) => {
+  try {
+      const userId = req.session.user.id;  // Получаем ID пользователя из сессии
+      const user = await User.findById(userId).populate("Cart.product");  // Загружаем данные пользователя с товарами в корзине
+
+      if (!user || !user.Cart || user.Cart.length === 0) {
+          return res.status(400).send("❌ Ваша корзина пуста");
+      }
+
+      // Проходим по всем товарам в корзине
+      for (const item of user.Cart) {
+          const product = item.product;
+          const size = item.size;
+
+          // Находим нужный размер товара в массиве sizes
+          const productSize = product.sizes.find(s => s.size.toUpperCase() === size.toUpperCase());
+
+          if (!productSize || productSize.quantity <= 0) {
+              // Если размер товара отсутствует в наличии, возвращаем ошибку
+              return res.status(400).send(`❌ Размер ${size} товара "${product.Name}" отсутствует в наличии`);
+          }
+
+          // Уменьшаем количество товара
+          productSize.quantity -= 1;
+          await product.save();  // Сохраняем изменения в базе данных
+      }
+
+      // Очищаем корзину пользователя после оформления покупки
+      user.Cart = [];
+      await user.save();
+
+      res.send("✅ Покупка успешно оформлена!");  // Отправляем успешный ответ
+  } catch (error) {
+      console.error("Ошибка при оформлении покупки:", error);
+      res.status(500).send("❌ Ошибка сервера");  // Обрабатываем ошибки сервера
+  }
+});
+router.post("/remove", async (req, res) => {
+  const { productId, size } = req.body;
+  
+  if (!req.session.user) {
+      return res.status(401).send("❌ Неавторизованный пользователь");
+  }
+
+  try {
+      const user = await User.findById(req.session.user.id);
+      if (!user) {
+          return res.status(404).send("❌ Пользователь не найден");
+      }
+
+      // Находим товар в корзине и удаляем
+      const productIndex = user.Cart.findIndex(item => 
+          item.product.toString() === productId && item.size === size
+      );
+
+      if (productIndex === -1) {
+          return res.status(404).send("❌ Товар не найден в корзине");
+      }
+
+      user.Cart.splice(productIndex, 1);  // Удаляем товар из корзины
+      await user.save();
+
+      res.status(200).send("✅ Товар успешно удален из корзины");
+  } catch (error) {
+      console.error("Ошибка при удалении товара:", error);
+      res.status(500).send("❌ Ошибка сервера");
+  }
+});
+router.post('/add-to-cart', (req, res) => {
+  const { productId, size } = req.body;
+
+  if (!req.session.cart) {
+    req.session.cart = [];
+  }
+
+  // Находим товар в базе данных (если требуется)
+  Product.findById(productId, (err, product) => {
+    if (err) {
+      return res.status(500).json({ success: false, message: 'Ошибка при добавлении товара в корзину' });
+    }
+
+    const cartItem = {
+      productId: product._id,
+      name: product.Name,
+      price: product.price,
+      size: size,
+      image: product.Image
+    };
+
+    // Добавляем товар в корзину
+    req.session.cart.push(cartItem);
+
+    res.json({ success: true });
+  });
+});
+// Уменьшение количества товара в корзине
+router.post('/cart/update-quantity', (req, res) => {
+  const { productId, action } = req.body;
+
+  if (req.session.cart) {
+    const product = req.session.cart.find(item => item.productId == productId);
+    if (product) {
+      if (action === 'increase') {
+        product.quantity++;
+      } else if (action === 'decrease' && product.quantity > 1) {
+        product.quantity--;
+      }
+    }
+    res.json({ success: true });
+  } else {
+    res.json({ success: false });
+  }
+});
+
+// Удаление товара из корзины
+router.post('/cart/remove', (req, res) => {
+  const { productId } = req.body;
+
+  if (req.session.cart) {
+    req.session.cart = req.session.cart.filter(item => item.productId != productId);
+    res.json({ success: true });
+  } else {
+    res.json({ success: false });
+  }
+});
+
+
+
+
+
+
+
 // 📌 Проверка кода сброса пароля
 router.get('/verify-reset-code', (req, res) => {
   res.render('verify-reset-code', { email: req.query.email });
