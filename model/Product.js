@@ -7,7 +7,6 @@ const productSchema = new mongoose.Schema({
   Category: { type: String, required: true },
   Price: { type: Number, required: true },
   Image: { type: String, required: true },
-  Cart: { type: Boolean, required: true },
   sizes: [
     {
       size: { type: String, required: true }, // Например, "M4", "M4.5"

@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const productId = addToCartButton.getAttribute("data-id");
 
         if (!selectedSize) {
-            alert("Please select a size first!");
+            showNotification("❌ Пожалуйста, выберите размер!", "error");
             return;
         }
 
@@ -26,11 +26,33 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                alert("Product added to cart!");
+                showNotification("✅ Товар добавлен в корзину!", "success");
             } else {
-                alert(data.message); // Выведет "You must be logged in to add to cart", если не авторизован
+                showNotification(`❌ Ошибка: ${data.message}`, "error");
             }
         })
-        .catch(error => console.error("Error:", error));
+        .catch(error => {
+            console.error("Ошибка:", error);
+            showNotification("❌ Ошибка при добавлении в корзину.", "error");
+        });
     });
 });
+
+// Функция показа уведомления
+function showNotification(message, type) {
+    let notification = document.createElement("div");
+    notification.classList.add("notification", type);
+    notification.textContent = message;
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.classList.add("show");
+    }, 100);
+
+    setTimeout(() => {
+        notification.classList.add("hide");
+        setTimeout(() => {
+            notification.remove();
+        }, 500);
+    }, 3000);
+}

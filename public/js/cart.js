@@ -2,18 +2,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Загружаем корзину из localStorage
     let localCart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    // Обновляем UI кнопки "Add to Cart"
-    const updateCartUI = () => {
-        document.querySelectorAll(".add-to-cart").forEach(button => {
-            const productId = button.getAttribute("data-id");
-            if (localCart.includes(productId)) {
-                button.textContent = "Added to Cart";
-                button.disabled = true;
-            }
-        });
-    };
-    updateCartUI();
-
     // Обработчик кнопки "Add to Cart"
     document.querySelectorAll(".add-to-cart").forEach(button => {
         button.addEventListener("click", async () => {
@@ -21,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const selectedSize = document.getElementById("size-select").value;
 
             if (!selectedSize) {
-                alert("⚠️ Please select a size before adding to cart!");
+                showNotification("⚠️ Выберите размер перед добавлением в корзину!", "error");
                 return;
             }
 
@@ -33,23 +21,40 @@ document.addEventListener("DOMContentLoaded", async () => {
                 });
 
                 if (response.status === 401) {
-                    alert("❌ Please log in to add items to your cart!");
+                    showNotification("❌ Войдите в аккаунт, чтобы добавить в корзину!", "error");
                     return;
                 }
 
                 if (response.ok) {
                     localCart.push(productId);
                     localStorage.setItem("cart", JSON.stringify(localCart));
-                    updateCartUI();
+                    showNotification("🛒 Товар добавлен в корзину!", "success");
                 } else {
-                    console.error("Failed to add item to cart");
+                    showNotification("⚠ Не удалось добавить товар в корзину!", "error");
                 }
             } catch (error) {
-                console.error("Network error:", error);
+                console.error("Ошибка сети:", error);
+                showNotification("⚠ Ошибка сети!", "error");
             }
         });
     });
 });
 
-// Скрипт для кнопки "Buy"
+// Функция показа уведомления
+function showNotification(message, type) {
+    let notification = document.createElement("div");
+    notification.classList.add("notification", type);
+    notification.textContent = message;
+    document.body.appendChild(notification);
 
+    setTimeout(() => {
+        notification.classList.add("show");
+    }, 100);
+
+    setTimeout(() => {
+        notification.classList.add("hide");
+        setTimeout(() => {
+            notification.remove();
+        }, 500);
+    }, 3000);
+}

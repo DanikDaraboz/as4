@@ -36,6 +36,21 @@ app.use((req, res, next) => {
   res.locals.user = req.session.user || null;
   next();
 });
+app.use(async (req, res, next) => {
+  if (req.session.user) {
+      try {
+          const user = await User.findById(req.session.user.id);
+          res.locals.favorites = user ? user.favorites : [];
+      } catch (error) {
+          console.error("Ошибка загрузки избранных:", error);
+          res.locals.favorites = [];
+      }
+  } else {
+      res.locals.favorites = [];
+  }
+  next();
+});
+
 
 // Подключение маршрутов
 app.use('/', authRoutes);

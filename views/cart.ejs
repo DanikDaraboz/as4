@@ -108,69 +108,7 @@
     <script src="/static/favorites.js"></script>
     <script src="/static/cart.js"></script>
     <script src="/static/payment.js"></script>
-    <script>
-document.addEventListener("DOMContentLoaded", () => {
-    const buyButtons = document.querySelectorAll(".buy");
-
-    buyButtons.forEach((buyButton) => {
-        buyButton.addEventListener("click", async (e) => {
-            e.preventDefault();
-
-            const productId = buyButton.dataset.productId;  // Получаем ID продукта с атрибута
-            const size = buyButton.dataset.size;  // Получаем размер с атрибута
-
-            try {
-                // Отправляем запрос с данными товара
-                const response = await fetch("/buy", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ productId, size })  // Отправляем данные в теле запроса
-                });
-
-                if (response.ok) {
-                    alert("✅ Покупка успешно оформлена!");
-                    window.location.href = "/";  // Перенаправляем на главную страницу
-                } else {
-                    const message = await response.text();
-                    alert(message);  // Показать ошибку от сервера
-                }
-            } catch (error) {
-                console.error("Ошибка при оформлении покупки:", error);
-                alert("❌ Ошибка при оформлении покупки.");
-            }
-        });
-    });
-});
-
-    </script>
-    <script>
-        document.querySelectorAll('.delete-btn').forEach(button => {
-    button.addEventListener('click', async (e) => {
-        const productId = e.target.getAttribute('data-product-id');
-        const size = e.target.getAttribute('data-size');
-
-        try {
-            // Отправка запроса на сервер для удаления товара из корзины
-            const response = await fetch("/remove", {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ productId, size })
-            });
-
-            if (response.ok) {
-                // Если товар успешно удален, обновляем UI
-                e.target.closest('.product-item').remove();
-            } else {
-                alert('Ошибка при удалении товара');
-            }
-        } catch (error) {
-            console.error('Ошибка сети:', error);
-            alert('Ошибка сети');
-        }
-    });
-});
-    </script>
+    <script src="/public/js/buy.js"></script>
+<script src="/public/js/delete.js"></script>
 </body>
 </html>

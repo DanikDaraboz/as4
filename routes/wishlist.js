@@ -7,6 +7,7 @@ const Product = require("../model/Product");
 async function getCategories() {
   return await Product.distinct("Category"); // Получает список всех категорий
 }
+
 // 📌 Получение избранных товаров текущего пользователя
 router.get("/wishlist", async (req, res) => {
     try {

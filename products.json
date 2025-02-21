@@ -6,12 +6,11 @@
     "Gender": "Men",
     "Price": 99.99,
     "Image": "/public/images/shoe1.png",
-    "Cart": false,
     "sizes": [
-      { "size": "M5.5", "quantity": 10 },
-      { "size": "M6", "quantity": 12 },
-      { "size": "M6.5", "quantity": 9 },
-      { "size": "M7", "quantity": 14 }
+      { "size": "m5.5", "quantity": 10 },
+      { "size": "m6", "quantity": 17 },
+      { "size": "m6.5", "quantity": 9 },
+      { "size": "m7", "quantity": 11 }
     ]
   },
   {
@@ -21,12 +20,11 @@
     "Gender": "Men",
     "Price": 99.99,
     "Image": "/public/images/shoe2.png",
-    "Cart": false,
     "sizes": [
-      { "size": "M5.5", "quantity": 8 },
-      { "size": "M6", "quantity": 10 },
-      { "size": "M6.5", "quantity": 11 },
-      { "size": "M7", "quantity": 9 }
+      { "size": "m5.5", "quantity": 10 },
+      { "size": "m6", "quantity": 17 },
+      { "size": "m6.5", "quantity": 9 },
+      { "size": "m7", "quantity": 11 }
     ]
   },
   {
@@ -36,12 +34,11 @@
     "Gender": "Men",
     "Price": 85.99,
     "Image": "/public/images/shoe3.png",
-    "Cart": false,
     "sizes": [
-      { "size": "M5.5", "quantity": 6 },
-      { "size": "M6", "quantity": 7 },
-      { "size": "M6.5", "quantity": 10 },
-      { "size": "M7", "quantity": 8 }
+      { "size": "m5.5", "quantity": 10 },
+      { "size": "m6", "quantity": 17 },
+      { "size": "m6.5", "quantity": 9 },
+      { "size": "m7", "quantity": 11 }
     ]
   },
   {
@@ -51,12 +48,11 @@
     "Gender": "Men",
     "Price": 119.99,
     "Image": "/public/images/shoe4.png",
-    "Cart": false,
     "sizes": [
-      { "size": "M5.5", "quantity": 5 },
-      { "size": "M6", "quantity": 8 },
-      { "size": "M6.5", "quantity": 9 },
-      { "size": "M7", "quantity": 7 }
+      { "size": "m5.5", "quantity": 10 },
+      { "size": "m6", "quantity": 17 },
+      { "size": "m6.5", "quantity": 9 },
+      { "size": "m7", "quantity": 11 }
     ]
   },
   {
@@ -66,12 +62,11 @@
     "Gender": "Men",
     "Price": 140.99,
     "Image": "/public/images/shoe5.png",
-    "Cart": false,
     "sizes": [
-      { "size": "M5.5", "quantity": 9 },
-      { "size": "M6", "quantity": 10 },
-      { "size": "M6.5", "quantity": 7 },
-      { "size": "M7", "quantity": 8 }
+      { "size": "m5.5", "quantity": 10 },
+      { "size": "m6", "quantity": 17 },
+      { "size": "m6.5", "quantity": 9 },
+      { "size": "m7", "quantity": 11 }
     ]
   },
   {
@@ -81,12 +76,11 @@
     "Gender": "Men",
     "Price": 75.99,
     "Image": "/public/images/shoe6.png",
-    "Cart": false,
     "sizes": [
-      { "size": "M5.5", "quantity": 6 },
-      { "size": "M6", "quantity": 12 },
-      { "size": "M6.5", "quantity": 9 },
-      { "size": "M7", "quantity": 11 }
+      { "size": "m5.5", "quantity": 10 },
+      { "size": "m6", "quantity": 17 },
+      { "size": "m6.5", "quantity": 9 },
+      { "size": "m7", "quantity": 11 }
     ]
   },
   {
@@ -96,12 +90,11 @@
     "Gender": "Men",
     "Price": 109.99,
     "Image": "/public/images/shoe7.png",
-    "Cart": false,
     "sizes": [
-      { "size": "M5.5", "quantity": 7 },
-      { "size": "M6", "quantity": 10 },
-      { "size": "M6.5", "quantity": 11 },
-      { "size": "M7", "quantity": 10 }
+      { "size": "m5.5", "quantity": 10 },
+      { "size": "m6", "quantity": 17 },
+      { "size": "m6.5", "quantity": 9 },
+      { "size": "m7", "quantity": 11 }
     ]
   },
   {
@@ -111,12 +104,11 @@
     "Gender": "Women",
     "Price": 79.99,
     "Image": "/public/images/ws1.png",
-    "Cart": false,
     "sizes": [
-      { "size": "W5", "quantity": 10 },
-      { "size": "W5.5", "quantity": 9 },
-      { "size": "W6", "quantity": 11 },
-      { "size": "W6.5", "quantity": 12 }
+      { "size": "w5", "quantity": 8 },
+      { "size": "w5.5", "quantity": 9 },
+      { "size": "w6", "quantity": 12 },
+      { "size": "w6.5", "quantity": 10 }
     ]
   },
   {
@@ -126,12 +118,11 @@
     "Gender": "Women",
     "Price": 89.99,
     "Image": "/public/images/ws2.png",
-    "Cart": false,
     "sizes": [
-      { "size": "W5", "quantity": 8 },
-      { "size": "W5.5", "quantity": 7 },
-      { "size": "W6", "quantity": 10 },
-      { "size": "W6.5", "quantity": 9 }
+      { "size": "w5", "quantity": 8 },
+      { "size": "w5.5", "quantity": 9 },
+      { "size": "w6", "quantity": 12 },
+      { "size": "w6.5", "quantity": 10 }
     ]
   },
   {
@@ -141,12 +132,11 @@
     "Gender": "Women",
     "Price": 120.99,
     "Image": "/public/images/ws3.png",
-    "Cart": false,
     "sizes": [
-      { "size": "W5", "quantity": 12 },
-      { "size": "W5.5", "quantity": 10 },
-      { "size": "W6", "quantity": 15 },
-      { "size": "W6.5", "quantity": 14 }
+      { "size": "w5", "quantity": 8 },
+      { "size": "w5.5", "quantity": 9 },
+      { "size": "w6", "quantity": 12 },
+      { "size": "w6.5", "quantity": 10 }
     ]
   },
   {
@@ -156,12 +146,11 @@
     "Gender": "Women",
     "Price": 89.99,
     "Image": "/public/images/ws4.png",
-    "Cart": false,
     "sizes": [
-      { "size": "W5", "quantity": 9 },
-      { "size": "W5.5", "quantity": 8 },
-      { "size": "W6", "quantity": 11 },
-      { "size": "W6.5", "quantity": 10 }
+      { "size": "w5", "quantity": 8 },
+      { "size": "w5.5", "quantity": 9 },
+      { "size": "w6", "quantity": 12 },
+      { "size": "w6.5", "quantity": 10 }
     ]
   },
   {
@@ -171,12 +160,11 @@
     "Gender": "Women",
     "Price": 99.99,
     "Image": "/public/images/ws5.png",
-    "Cart": false,
     "sizes": [
-      { "size": "W5", "quantity": 8 },
-      { "size": "W5.5", "quantity": 9 },
-      { "size": "W6", "quantity": 12 },
-      { "size": "W6.5", "quantity": 10 }
+      { "size": "w5", "quantity": 8 },
+      { "size": "w5.5", "quantity": 9 },
+      { "size": "w6", "quantity": 12 },
+      { "size": "w6.5", "quantity": 10 }
     ]
   },
   {
@@ -186,12 +174,11 @@
     "Gender": "Men",
     "Price": 109.99,
     "Image": "/public/images/ms1.png",
-    "Cart": false,
     "sizes": [
-      { "size": "M5.5", "quantity": 10 },
-      { "size": "M6", "quantity": 12 },
-      { "size": "M6.5", "quantity": 9 },
-      { "size": "M7", "quantity": 14 }
+      { "size": "m5.5", "quantity": 10 },
+      { "size": "m6", "quantity": 17 },
+      { "size": "m6.5", "quantity": 9 },
+      { "size": "m7", "quantity": 11 }
     ]
   },
   {
@@ -201,12 +188,11 @@
     "Gender": "Men",
     "Price": 89.99,
     "Image": "/public/images/ms2.png",
-    "Cart": false,
     "sizes": [
-      { "size": "M5.5", "quantity": 10 },
-      { "size": "M6", "quantity": 17 },
-      { "size": "M6.5", "quantity": 9 },
-      { "size": "M7", "quantity": 11 }
+      { "size": "m5.5", "quantity": 10 },
+      { "size": "m6", "quantity": 17 },
+      { "size": "m6.5", "quantity": 9 },
+      { "size": "m7", "quantity": 11 }
     ]
   },
   {
@@ -216,12 +202,11 @@
     "Gender": "Men",
     "Price": 119.99,
     "Image": "/public/images/ms3.png",
-    "Cart": false,
     "sizes": [
-      { "size": "M5.5", "quantity": 10 },
-      { "size": "M6", "quantity": 17 },
-      { "size": "M6.5", "quantity": 9 },
-      { "size": "M7", "quantity": 11 }
+      { "size": "m5.5", "quantity": 10 },
+      { "size": "m6", "quantity": 17 },
+      { "size": "m6.5", "quantity": 9 },
+      { "size": "m7", "quantity": 11 }
     ]
   },
   {
@@ -231,12 +216,11 @@
     "Gender": "Men",
     "Price": 89.99,
     "Image": "/public/images/ms4.png",
-    "Cart": false,
     "sizes": [
-      { "size": "M5.5", "quantity": 12 },
-      { "size": "M6", "quantity": 17 },
-      { "size": "M6.5", "quantity": 9 },
-      { "size": "M7", "quantity": 14 }
+      { "size": "m5.5", "quantity": 12 },
+      { "size": "m6", "quantity": 17 },
+      { "size": "m6.5", "quantity": 9 },
+      { "size": "m7", "quantity": 14 }
     ]
   }
 ]

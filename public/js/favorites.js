@@ -1,16 +1,4 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    // Загружаем избранные товары из localStorage
-    let localFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-
-    // Обновляем UI на основе localStorage
-    document.querySelectorAll(".favorites-icon").forEach(icon => {
-        const productId = icon.getAttribute("data-id");
-        if (localFavorites.includes(productId)) {
-            icon.classList.add("favorited");
-        }
-    });
-
-    // Загружаем избранные товары с сервера
     try {
         const response = await fetch("/api/favorites", {
             method: "GET",
@@ -20,11 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (response.ok) {
             const favoriteProducts = await response.json();
 
-            // Обновляем localStorage, если сервер вернул данные
-            localFavorites = favoriteProducts;
-            localStorage.setItem("favorites", JSON.stringify(localFavorites));
-
-            // Обновляем UI
+            // Обновляем UI (без localStorage)
             document.querySelectorAll(".favorites-icon").forEach(icon => {
                 const productId = icon.getAttribute("data-id");
                 if (favoriteProducts.includes(productId)) {
@@ -32,47 +16,56 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
             });
         } else {
-            console.error("Ошибка при загрузке избранных товаров");
+            showNotification("⚠ Ошибка загрузки избранного", "error");
         }
     } catch (error) {
-        console.error("Ошибка сети:", error);
+        showNotification("⚠ Ошибка сети", "error");
     }
 
-    // Обработчик клика по иконке избранного
     document.querySelectorAll(".favorites-icon").forEach(icon => {
         icon.addEventListener("click", async () => {
-            const productId = icon.getAttribute("data-id");
+            const productId = icon.getAttribute("data-id").trim();
+            const isFavorited = icon.classList.contains("favorited");
 
-            // Обновляем локально
-            if (localFavorites.includes(productId)) {
-                localFavorites = localFavorites.filter(id => id !== productId);
-                icon.classList.remove("favorited");
-            } else {
-                localFavorites.push(productId);
-                icon.classList.add("favorited");
-            }
-
-            // Сохраняем в localStorage
-            localStorage.setItem("favorites", JSON.stringify(localFavorites));
-
-            // Отправляем запрос на сервер для сохранения состояния
             try {
                 const response = await fetch(`/api/favorites/${productId}`, {
-                    method: "PUT",
+                    method:  "PUT",
                     headers: { "Content-Type": "application/json" }
                 });
-
+                console.log(await response.json());
                 if (response.status === 401) {
-                    alert("❌ Войдите в аккаунт, чтобы добавить в избранное!");
+                    showNotification("❌ Войдите в аккаунт, чтобы добавить в избранное!", "error");
                     return;
                 }
 
-                if (!response.ok) {
-                    console.error("Ошибка при добавлении в избранное");
+                if (response.ok) {
+                    icon.classList.toggle("favorited");
+                    showNotification(isFavorited ? "❌ Товар удалён из избранного" : "⭐ Товар добавлен в избранное", "success");
+                } else {
+                    showNotification("⚠ Ошибка при обновлении избранного", "error");
                 }
             } catch (error) {
-                console.error("Ошибка сети:", error);
+                showNotification("⚠ Ошибка сети", "error");
             }
         });
     });
 });
+
+// Функция показа уведомления
+function showNotification(message, type) {
+    let notification = document.createElement("div");
+    notification.classList.add("notification", type);
+    notification.textContent = message;
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.classList.add("show");
+    }, 100);
+
+    setTimeout(() => {
+        notification.classList.add("hide");
+        setTimeout(() => {
+            notification.remove();
+        }, 500);
+    }, 3000);
+}

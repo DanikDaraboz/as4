@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../model/Product"); // Подключаем модель продукта
-
+const User = require("../model/User");
 // Маршрут для отображения деталей продукта
 router.get("/product/:id", async (req, res) => {
     try {
@@ -17,7 +17,8 @@ router.get("/product/:id", async (req, res) => {
         res.render("product", { 
             title: product.name, 
             product,
-            categories // Передаем список категорий в шаблон
+            categories,
+            favorites: res.locals.favorites
         });
     } catch (error) {
         console.error("Ошибка при получении товара:", error);

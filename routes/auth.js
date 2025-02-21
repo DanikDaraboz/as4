@@ -4,7 +4,8 @@ const nodemailer = require('nodemailer');
 const speakeasy = require('speakeasy');
 const qrcode = require('qrcode');
 const User = require('../model/User');
-
+const Product = require('../model/Product');
+const Order = require('../model/Order'); // модель заказов
 const router = express.Router();
 
 // Настройка Nodemailer
@@ -17,7 +18,7 @@ async function getCategories() {
 }
 
 // 📌 Главная страница
-const Product = require("../model/Product");
+
 
 router.get("/", async (req, res) => {
   try {
@@ -29,8 +30,7 @@ router.get("/", async (req, res) => {
       const user = await User.findById(req.user._id);
       favorites = user.favorites.map(id => id.toString()); // Преобразуем ObjectId в строку
     }
-
-    res.render("index", { products, Categories: categories, favorites });
+    res.render("index", { products, Categories: categories, Favorites: favorites });
   } catch (error) {
     res.status(500).send("Ошибка загрузки товаров");
   }
@@ -142,44 +142,75 @@ router.get("/cart", async (req, res) => {
 });
 
 
-
 router.post("/buy", async (req, res) => {
   try {
-      const userId = req.session.user.id;  // Получаем ID пользователя из сессии
-      const user = await User.findById(userId).populate("Cart.product");  // Загружаем данные пользователя с товарами в корзине
+      console.log("req.session.user:", req.session.user); // Логируем пользователя
 
-      if (!user || !user.Cart || user.Cart.length === 0) {
-          return res.status(400).send("❌ Ваша корзина пуста");
+      if (!req.session.user) {
+          return res.status(401).json({ message: "❌ Пользователь не аутентифицирован" });
       }
 
-      // Проходим по всем товарам в корзине
-      for (const item of user.Cart) {
-          const product = item.product;
-          const size = item.size;
+      const userId = req.session.user.id;  
+      console.log("userId:", userId); // Проверим, есть ли _id
+      const user = await User.findById(userId);
+      if (!user) {
+          return res.status(404).json({ message: "❌ Пользователь не найден" });
+      }
+      if (!user || user.Cart.length === 0) {
+          return res.status(400).json({ message: "Корзина пуста" });
+      }
 
-          // Находим нужный размер товара в массиве sizes
-          const productSize = product.sizes.find(s => s.size.toUpperCase() === size.toUpperCase());
+      let totalPrice = 0;
+      let orderProducts = [];
 
-          if (!productSize || productSize.quantity <= 0) {
-              // Если размер товара отсутствует в наличии, возвращаем ошибку
-              return res.status(400).send(`❌ Размер ${size} товара "${product.Name}" отсутствует в наличии`);
+      for (let item of user.Cart) {
+          const product = await Product.findById(item.product._id);
+          if (!product) continue;
+
+          // Находим нужный размер в массиве sizes
+          const sizeIndex = product.sizes.findIndex((s) => s.size === item.size);
+          if (sizeIndex === -1 || product.sizes[sizeIndex].quantity <= 0) {
+              return res.status(400).json({ message: `Размер ${item.size} у ${product.Name} закончился` });
           }
 
-          // Уменьшаем количество товара
-          productSize.quantity -= 1;
-          await product.save();  // Сохраняем изменения в базе данных
+          // Уменьшаем количество на складе
+          product.sizes[sizeIndex].quantity -= 1;
+          await product.save();
+
+          // Добавляем товар в заказ
+          orderProducts.push({
+              product: product._id,
+              size: item.size,
+              quantity: 1, // По умолчанию 1, можно менять при наличии количества в корзине
+              price: product.Price,
+          });
+
+          // Считаем общую стоимость
+          totalPrice += product.Price;
       }
 
-      // Очищаем корзину пользователя после оформления покупки
-      user.Cart = [];
-      await user.save();
+      // Создаем заказ
+      const newOrder = new Order({
+          user: userId,
+          products: orderProducts,
+          totalPrice: totalPrice,
+          status: "pending",
+      });
 
-      res.send("✅ Покупка успешно оформлена!");  // Отправляем успешный ответ
+      await newOrder.save();
+
+      // Очищаем корзину пользователя
+      await User.updateOne({ _id: userId }, { $set: { Cart: [] } });
+
+      res.status(200).json({ message: "Покупка завершена, заказ создан!" });
   } catch (error) {
-      console.error("Ошибка при оформлении покупки:", error);
-      res.status(500).send("❌ Ошибка сервера");  // Обрабатываем ошибки сервера
+      console.error("Ошибка при оформлении заказа:", error);
+      res.status(500).json({ message: "Ошибка сервера" });
   }
 });
+
+
+
 router.post("/remove", async (req, res) => {
   const { productId, size } = req.body;
   

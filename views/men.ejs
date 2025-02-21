@@ -58,7 +58,12 @@
                 <h2><%= product.Name %></h2>
                 <p class="product-price">$<%= product.Price %></p>
                 <a href="/product/<%= product.ID %>" class="view-details">View Details</a>
-                <img src="/public/images/favorites2.png" alt="Add to Favorites" class="favorites-icon" data-id="{{.ID}}">
+                <% let isFavorited = user && user.favorites ? user.favorites.map(fav => fav.toString()).includes(product._id.toString()) : false; %>
+                <img src="/public/images/favorites2.png" 
+                     alt="Add to Favorites" 
+                     class="favorites-icon <%= isFavorited ? 'favorited' : '' %>"
+                     data-id="<%= product._id %>"
+                     data-userid="<%= user ? user._id : '' %>">
 
             </div>
         <% }); %>
@@ -102,7 +107,7 @@
     <script src="/static/active.js"></script>
     <script src="/static/catalog.js"></script>
     <script src="/static/account.js"></script>
-    <script src="/static/favorites.js"></script>
+    <script src="/public/js/favorites.js"></script>
     <script src="/static/cart.js"></script>
 </body>
 </html>

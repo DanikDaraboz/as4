@@ -12,7 +12,12 @@
     <header>
         <nav class="navbar2">
             <div class="sign">
-                    <a href="/dashboard" id="user-icon" class="user-icon"></a>
+                    <% if (user) { %>
+                        <a href="/dashboard" id="user-icon" class="user-icon"></a>
+                    <% } else { %>
+                        <a href="/login" class="sign-in-btn" style="text-decoration: false;">Sign in</a>
+                    <% } %>
+                
                         <button class="theme-toggle" onclick="toggleTheme()">
                             <img id="sun-icon" src="/public/images/sun.png" alt="Sun Icon" class="theme-icon">
                             <img id="moon-icon" src="/public/images/moon.png" alt="Moon Icon" class="theme-icon2">
@@ -160,5 +165,6 @@
     <script src="/static/account.js"></script>
     <script src="/public/js/favorites.js"></script>
     <script src="/static/cart.js"></script>
+    
 </body>
 </html>
